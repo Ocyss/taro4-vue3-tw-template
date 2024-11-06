@@ -6,6 +6,7 @@ module.exports = {
       framework: 'vue3',
       ts: true,
       compiler: 'vite',
+      dynamicImportNode: false,
     }],
   ],
 }

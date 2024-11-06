@@ -5,6 +5,10 @@ import taroVariableConfig from 'eslint-config-taro/rules/variables.js'
 import originalVuePlugin from 'eslint-plugin-vue'
 // import originalTaroPlugin from 'eslint-plugin-taro'
 
+import markdown from '@eslint/markdown'
+
+// 参考 https://github.com/whaoa/taro-applet-boilerplate/blob/main/eslint.config.mjs
+
 const legacyOriginalVuePluginName = 'vue'
 const legacyOriginalVuePluginPrefix = `${legacyOriginalVuePluginName}/`
 const currentOriginalVuePluginName = 'o-vue'
@@ -37,7 +41,13 @@ export default antfu(
         },
       ],
       'perfectionist/sort-imports': 'off',
+      'vue/no-v-text-v-html-on-component': 'off',
     },
+    stylistic: {
+      indent: 2,
+      quotes: 'single',
+    },
+    jsonc: false,
   },
   {
     files: ['src/**/*.{js,jsx,ts,tsx}'],
@@ -128,13 +138,11 @@ export default antfu(
     },
   },
   {
-    files: ['tsconfig.json'],
-    rules: {
-      'jsonc/sort-keys': 'off',
+    files: ['**/*.md'],
+    plugins: {
+      markdown,
     },
-  },
-  {
-    files: ['*.md'],
+    language: 'markdown/commonmark',
     rules: {
       'style/max-len': 'off',
     },

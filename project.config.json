@@ -1,1 +1,1 @@
-{ "miniprogramRoot": "./dist", "projectname": "ttweb", "description": "n", "appid": "testAppId", "setting": { "urlCheck": true, "es6": false, "enhance": false, "compileHotReLoad": false, "postcss": false, "minified": false }, "compileType": "miniprogram" }
+{"miniprogramRoot":"./dist","projectname":"ttweb","description":"n","appid":"testAppId","setting":{"urlCheck":true,"es6":false,"enhance":false,"compileHotReLoad":false,"postcss":false,"minified":false},"compileType":"miniprogram"}
