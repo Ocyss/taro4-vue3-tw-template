@@ -64,7 +64,8 @@
     "sass": "^1.80.6",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
     "vue": "^3.5.12",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "webpack": "5.91.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.8.0",
@@ -75,6 +76,7 @@
     "@tarojs/plugin-mini-ci": "^4.0.7",
     "@tarojs/plugin-vue-devtools": "^4.0.7",
     "@tarojs/vite-runner": "4.0.7",
+    "@tarojs/webpack5-runner": "^4.0.7",
     "@types/node": "^22.9.0",
     "@typescript-eslint/parser": "^8.0.0",
     "@vitejs/plugin-vue": "^4.6.2",
@@ -86,6 +88,7 @@
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-taro": "^3.3.20",
     "eslint-plugin-vue": "^9.30.0",
+    "mini-css-extract-plugin": "^2.9.2",
     "postcss": "^8.4.47",
     "postcss-rem-to-responsive-pixel": "^6.0.2",
     "stylelint": "^16.10.0",
@@ -95,6 +98,7 @@
     "unplugin-vue-components": "^0.27.4",
     "vite": "^4.5.5",
     "vue-eslint-parser": "^9.4.3",
-    "weapp-tailwindcss": "^3.6.2"
+    "weapp-tailwindcss": "^3.6.2",
+    "webpack-chain": "^6.5.1"
   }
 }

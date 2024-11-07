@@ -5,8 +5,11 @@ export const useCounterStore = defineStore('counter', {
     return { count: 0, selected: 0 }
   },
   actions: {
-    increment() {
-      this.count++
+    increment(num: number = 1) {
+      this.count += num
+    },
+    decrement(num: number = 1) {
+      this.count -= num
     },
     setSelected(index: number) {
       this.selected = index

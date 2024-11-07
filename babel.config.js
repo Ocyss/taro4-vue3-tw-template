@@ -8,5 +8,15 @@ module.exports = {
       compiler: 'vite',
       dynamicImportNode: false,
     }],
+    ['@babel/preset-env'],
+    ['@babel/preset-typescript', {
+      isTSX: true,
+      allExtensions: true,
+      allowDeclareFields: true,
+    }],
+  ],
+  plugins: [
+    '@babel/plugin-transform-typescript',
+    '@babel/plugin-proposal-class-properties',
   ],
 }

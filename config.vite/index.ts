@@ -3,9 +3,11 @@ import path from 'node:path'
 
 import { defineConfig } from '@tarojs/cli'
 
-import { UnifiedWebpackPluginV5 } from 'weapp-tailwindcss/webpack'
+import tailwindcss from 'tailwindcss'
 
-import ComponentsPlugin from 'unplugin-vue-components/webpack'
+import { UnifiedViteWeappTailwindcssPlugin as uvtw } from 'weapp-tailwindcss/vite'
+
+import ComponentsPlugin from 'unplugin-vue-components/vite'
 
 import NutUIResolver from '@nutui/auto-import-resolver'
 
@@ -15,9 +17,11 @@ import devConfig from './dev'
 
 import type { UserConfigExport } from '@tarojs/cli'
 
+import type { Plugin } from 'vite'
+
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
-export default defineConfig<'webpack5'>(async (merge, _) => {
-  const baseConfig: UserConfigExport<'webpack5'> = {
+export default defineConfig<'vite'>(async (merge, _) => {
+  const baseConfig: UserConfigExport<'vite'> = {
     plugins: ['@tarojs/plugin-html'],
     projectName: 'ttweb',
     date: '2024-9-30',
@@ -42,41 +46,34 @@ export default defineConfig<'webpack5'>(async (merge, _) => {
       patterns: [],
       options: {},
     },
-    cache: {
-      enable: false,
-    },
     framework: 'vue3',
     compiler: {
-      type: 'webpack5',
-      prebundle: {
-        enable: false,
-      },
-      // vitePlugins: [
-      //   {
-      //     name: 'postcss-config-loader-plugin',
-      //     config(config) {
-      //       // 加载 tailwindcss
-      //       if (typeof config.css?.postcss === 'object') {
-      //         config.css?.postcss.plugins?.unshift(tailwindcss())
-      //       }
-      //     },
-      //   },
-      //   uvtw({
-      //     // rem转rpx
-      //     rem2rpx: true,
-      //     // 除了小程序这些，其他平台都 disable
-      //     disabled:
-      //       process.env.TARO_ENV === 'h5'
-      //       || process.env.TARO_ENV === 'harmony'
-      //       || process.env.TARO_ENV === 'rn',
-      //   }),
-      //   ComponentsPlugin({
-      //     resolvers: [NutUIResolver({ taro: true })],
-      //     dts: 'types/components.d.ts',
-      //   }),
-      // ] as Plugin[],
+      type: 'vite',
+      vitePlugins: [
+        {
+          name: 'postcss-config-loader-plugin',
+          config(config) {
+            // 加载 tailwindcss
+            if (typeof config.css?.postcss === 'object') {
+              config.css?.postcss.plugins?.unshift(tailwindcss())
+            }
+          },
+        },
+        uvtw({
+          // rem转rpx
+          rem2rpx: true,
+          // 除了小程序这些，其他平台都 disable
+          disabled:
+            process.env.TARO_ENV === 'h5'
+            || process.env.TARO_ENV === 'harmony'
+            || process.env.TARO_ENV === 'rn',
+        }),
+        ComponentsPlugin({
+          resolvers: [NutUIResolver({ taro: true })],
+          dts: 'types/components.d.ts',
+        }),
+      ] as Plugin[],
     },
-
     weapp: {
       module: {
         postcss: {
@@ -94,6 +91,7 @@ export default defineConfig<'webpack5'>(async (merge, _) => {
       },
     },
     mini: {
+
       postcss: {
         pxtransform: {
           enable: true,
@@ -106,21 +104,6 @@ export default defineConfig<'webpack5'>(async (merge, _) => {
             generateScopedName: '[name]__[local]___[hash:base64:5]',
           },
         },
-      },
-      miniCssExtractPluginOption: {
-        ignoreOrder: true,
-
-      },
-      webpackChain(chain, _webpack) {
-        chain.plugin('unplugin-vue-components').use(ComponentsPlugin({
-          resolvers: [NutUIResolver({ taro: true })],
-          dts: 'types/components.d.ts',
-        }))
-
-        chain.plugin('unified-webpack')
-          .use(UnifiedWebpackPluginV5, [{
-            appType: 'taro',
-          }])
       },
     },
     h5: {
@@ -145,11 +128,6 @@ export default defineConfig<'webpack5'>(async (merge, _) => {
             generateScopedName: '[name]__[local]___[hash:base64:5]',
           },
         },
-      },
-      webpackChain(chain, _webpack) {
-        chain.plugin('unplugin-vue-components').use(ComponentsPlugin({
-          resolvers: [NutUIResolver({ taro: true })],
-        }))
       },
       compile: {
         include: ['@nutui/nutui-taro', '@nutui/icons-vue-taro', 'nutui', 'nutui-taro', 'icons-vue-taro'],
