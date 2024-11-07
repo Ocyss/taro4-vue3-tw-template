@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import Taro from '@tarojs/taro'
 
-const msg = ref('Hello world123')
+const msg = ref('Hello Taro')
 
 const show = ref(false)
 function click() {
   show.value = true
-}
-const gradientColor = {
-  '0%': '#FF5E5E',
-  '100%': '#FFA062',
 }
 </script>
 
@@ -34,8 +31,11 @@ const gradientColor = {
     <nut-button type="info">
       Info
     </nut-button>
-
-    <nut-circle-progress :progress="50" color="skyblue" />
-    <nut-circle-progress :progress="100" :color="gradientColor" />
   </div>
+  <nut-divider dashed>
+    跳转
+  </nut-divider>
+  <a block type="default" @click="Taro.navigateTo({ url: '/pages/router/index' })">
+    前往"vue-router"页面
+  </a>
 </template>

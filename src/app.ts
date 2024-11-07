@@ -1,9 +1,12 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+
+import { router } from './router'
+
 import '@nutui/touch-emulator'
 
 import './app.css'
-import '@tarojs/taro/html.css'
+// import '@tarojs/taro/html.css'
 
 const App = createApp({
   onShow(_options) {
@@ -13,5 +16,5 @@ const App = createApp({
 })
 
 App.use(createPinia())
-
+App.use(router)
 export default App

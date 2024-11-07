@@ -1,4 +1,6 @@
 /* eslint-disable node/prefer-global/process */
+import path from 'node:path'
+
 import { defineConfig } from '@tarojs/cli'
 
 import tailwindcss from 'tailwindcss'
@@ -20,7 +22,6 @@ import type { Plugin } from 'vite'
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
 export default defineConfig<'vite'>(async (merge, _) => {
   const baseConfig: UserConfigExport<'vite'> = {
-
     plugins: ['@tarojs/plugin-html'],
     projectName: 'ttweb',
     date: '2024-9-30',
@@ -39,27 +40,12 @@ export default defineConfig<'vite'>(async (merge, _) => {
       375: 2 / 1,
     },
     sourceRoot: 'src',
-    outputRoot: 'dist',
+    outputRoot: `dist/${process.env.TARO_ENV}`,
     defineConstants: {},
     copy: {
       patterns: [],
       options: {},
     },
-    cache: { // vite 无效
-      enable: false,
-    },
-    // terser: {
-    //   enable: false,
-    // },
-    // esbuild: {
-    //   minify: {
-    //     enable: true,
-    //     config: {
-    //     // 配置项同 https://github.com/privatenumber/esbuild-loader#minifyplugin
-    //       target: 'es5', // target 默认值为 es5
-    //     },
-    //   },
-    // },
     framework: 'vue3',
     compiler: {
       type: 'vite',
@@ -87,11 +73,6 @@ export default defineConfig<'vite'>(async (merge, _) => {
           dts: 'types/components.d.ts',
         }),
       ] as Plugin[],
-      prebundle: { // vite 无效
-        enable: false,
-        timings: true,
-        exclude: ['@nutui/nutui-taro'],
-      },
     },
     weapp: {
       module: {
@@ -148,6 +129,11 @@ export default defineConfig<'vite'>(async (merge, _) => {
           },
         },
       },
+      compile: {
+        include: ['@nutui/nutui-taro', '@nutui/icons-vue-taro', 'nutui', 'nutui-taro', 'icons-vue-taro'],
+      },
+
+      esnextModules: ['nutui-taro', 'icons-vue-taro'],
     },
     rn: {
       appName: 'taroDemo',
@@ -157,6 +143,10 @@ export default defineConfig<'vite'>(async (merge, _) => {
         },
       },
     },
+    alias: {
+      '~': path.resolve(__dirname, '..', 'src'),
+    },
+
   }
   if (process.env.NODE_ENV === 'development') {
     // 本地开发构建配置（不混淆压缩）

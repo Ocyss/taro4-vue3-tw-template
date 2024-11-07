@@ -7,11 +7,21 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Footer: typeof import('./../src/components/Footer.vue')['default']
+    Header: typeof import('./../src/components/Header.vue')['default']
+    Home: typeof import('./../src/components/Home.vue')['default']
     NutButton: typeof import('@nutui/nutui-taro')['Button']
     NutCell: typeof import('@nutui/nutui-taro')['Cell']
-    NutCircleProgress: typeof import('@nutui/nutui-taro')['CircleProgress']
+    NutDivider: typeof import('@nutui/nutui-taro')['Divider']
     NutPopup: typeof import('@nutui/nutui-taro')['Popup']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Tab1: typeof import('./../src/components/Tab1.vue')['default']
+    Tab2: typeof import('./../src/components/Tab2.vue')['default']
+    Tab3: typeof import('./../src/components/Tab3.vue')['default']
+    Tab4: typeof import('./../src/components/Tab4.vue')['default']
+    User: typeof import('./../src/components/User.vue')['default']
+    UserPosts: typeof import('./../src/components/UserPosts.vue')['default']
+    UserProfile: typeof import('./../src/components/UserProfile.vue')['default']
   }
 }
