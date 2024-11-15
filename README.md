@@ -1,5 +1,8 @@
 ## taro4-vue3-tw-template
 
+> [!IMPORTANT]
+> Vite 版本, bug比较多暂时不使用, 切换分支 `git checkout webpack` 使用 Webpack 版本
+
 一个基于 Taro4、Vue3、Vite、NutUI、TypeScript、TailwindCSS 的模板
 比如 antfu 的 Eslint 配置, 以及一些其他配置
 
